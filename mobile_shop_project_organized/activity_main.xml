@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background_image">
+
+    <!-- Background ImageView -->
+    <ImageView
+        android:id="@+id/backgroundImage"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="centerCrop"
+        android:src="@drawable/background_image" />
+
+    <!-- Login Form Container -->
+    <LinearLayout
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_marginStart="50dp"
+        android:layout_marginEnd="50dp"
+        android:orientation="vertical"
+        android:padding="20dp">
+
+        <!-- Username Input -->
+        <EditText
+            android:id="@+id/usernameEditText"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginBottom="15dp"
+            android:background="@drawable/edit_text_background"
+            android:hint="Username"
+            android:inputType="text"
+            android:padding="15dp"
+            android:textColor="#333333"
+            android:textColorHint="#666666"
+            android:textSize="16sp" />
+
+        <!-- Password Input -->
+        <EditText
+            android:id="@+id/passwordEditText"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginBottom="20dp"
+            android:background="@drawable/edit_text_background"
+            android:hint="Password"
+            android:inputType="textPassword"
+            android:padding="15dp"
+            android:textColor="#333333"
+            android:textColorHint="#666666"
+            android:textSize="16sp" />
+
+        <!-- Login Button -->
+        <Button
+            android:id="@+id/loginButton"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="@drawable/button_background"
+            android:text="Login"
+            android:textColor="#FFFFFF"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <!-- Loading Progress Bar -->
+        <ProgressBar
+            android:id="@+id/loadingProgressBar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="20dp"
+            android:visibility="gone" />
+
+        <!-- Status Text -->
+        <TextView
+            android:id="@+id/statusTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:gravity="center"
+            android:textColor="#FFFFFF"
+            android:textSize="14sp"
+            android:visibility="gone" />
+
+    </LinearLayout>
+
+</RelativeLayout>
+
