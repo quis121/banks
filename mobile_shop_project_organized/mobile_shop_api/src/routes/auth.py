@@ -53,7 +53,7 @@ def login():
         # Authenticate against your backend database
         user_from_db = LoginData.query.filter_by(username=username).first()
         
-        if not user_from_db or user_from_db.user_password != password: # Assuming plain text password for now
+        if not user_from_db or not user_from_db.check_password(password): # Use check_password for hashed passwords
             return jsonify({
                 'success': False,
                 'message': 'Invalid username or password'
