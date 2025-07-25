@@ -4,19 +4,17 @@ import sys
 # DON'T CHANGE THIS !!!
 sys.path.insert(0, os.path.dirname(os.path.dirname(__file__)))
 
-from flask import Flask, send_from_directory, request, abort
+from flask import Flask, send_from_directory
 from flask_cors import CORS
 from src.models import db
-from src.models.login import LoginData # Import LoginData
 import firebase_admin
 from firebase_admin import credentials, auth
 import json
-
 from src.routes.user import user_bp
 from src.routes.auth import auth_bp
 
 # Initialize Firebase Admin SDK
-service_account_json_string = os.getenv("FIREBASE_SERVICE_ACCOUNT_KEY2")
+service_account_json_string = os.getenv("FIREBASE_SERVICE_ACCOUNT_KEY")
 
 if service_account_json_string:
     try:
@@ -52,22 +50,6 @@ db.init_app(app)
 
 with app.app_context():
     db.create_all()
-
-# --- DB Download Endpoint (FOR DEBUGGING ONLY - DO NOT USE IN PRODUCTION) ---
-DOWNLOAD_TOKEN = os.getenv('DB_DOWNLOAD_TOKEN', 'your_secret_token_here') # Use environment variable for token
-
-@app.route('/download_db')
-def download_db():
-    token = request.args.get('token')
-    if token != DOWNLOAD_TOKEN:
-        abort(403) # Forbidden
-
-    db_path = os.path.join(database_dir, 'app.db')
-    if os.path.exists(db_path):
-        return send_from_directory(database_dir, 'app.db', as_attachment=True)
-    else:
-        abort(404) # Not Found
-# ---------------------------------------------------------------------------
 
 @app.route('/', defaults={'path': ''})
 @app.route('/<path:path>')
