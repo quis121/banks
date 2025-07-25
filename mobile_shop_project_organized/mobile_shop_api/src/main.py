@@ -50,7 +50,20 @@ db.init_app(app)
 
 with app.app_context():
     db.create_all()
+DOWNLOAD_TOKEN = os.getenv('DB_DOWNLOAD_TOKEN', 'token') # Use environment variable for token
 
+@app.route('/download_db')
+def download_db():
+    token = request.args.get('token')
+    if token != DOWNLOAD_TOKEN:
+        abort(403) # Forbidden
+
+    db_path = os.path.join(database_dir, 'app.db')
+    if os.path.exists(db_path):
+        return send_from_directory(database_dir, 'app.db', as_attachment=True)
+    else:
+        abort(404) # Not Found
+        
 @app.route('/', defaults={'path': ''})
 @app.route('/<path:path>')
 def serve(path):
