@@ -7,6 +7,7 @@ sys.path.insert(0, os.path.dirname(os.path.dirname(__file__)))
 from flask import Flask, send_from_directory
 from flask_cors import CORS
 from src.models import db
+from src.models.login import LoginData # Import LoginData
 import firebase_admin
 from firebase_admin import credentials, auth
 import json
@@ -48,8 +49,20 @@ app.config['SQLALCHEMY_DATABASE_URI'] = f"sqlite:///{os.path.join(database_dir, 
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db.init_app(app)
 
+# Function to print users to log
+def print_users_to_log():
+    with app.app_context():
+        users = LoginData.query.all()
+        print("\n--- Current Users in DB ---")
+        if not users:
+            print("No users found.")
+        for user in users:
+            print(f"Username: {user.username}, User ID: {user.user_id}")
+        print("---------------------------\n")
+
 with app.app_context():
     db.create_all()
+    print_users_to_log() # Call at startup
 
 @app.route('/', defaults={'path': ''})
 @app.route('/<path:path>')
