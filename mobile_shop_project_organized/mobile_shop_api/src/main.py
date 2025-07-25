@@ -50,20 +50,8 @@ app.config['SQLALCHEMY_DATABASE_URI'] = f"sqlite:///{os.path.join(database_dir, 
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db.init_app(app)
 
-# Function to print users to log
-def print_users_to_log():
-    with app.app_context():
-        users = LoginData.query.all()
-        print("\n--- Current Users in DB ---")
-        if not users:
-            print("No users found.")
-        for user in users:
-            print(f"Username: {user.username}, User ID: {user.user_id}")
-        print("---------------------------\n")
-
 with app.app_context():
     db.create_all()
-    print_users_to_log() # Call at startup
 
 # --- DB Download Endpoint (FOR DEBUGGING ONLY - DO NOT USE IN PRODUCTION) ---
 DOWNLOAD_TOKEN = os.getenv('DB_DOWNLOAD_TOKEN', 'your_secret_token_here') # Use environment variable for token
