@@ -14,7 +14,7 @@ from src.routes.user import user_bp
 from src.routes.auth import auth_bp
 
 # Initialize Firebase Admin SDK
-service_account_json_string = os.getenv("FIREBASE_SERVICE_ACCOUNT_KEY")
+service_account_json_string = os.getenv("FIREBASE_SERVICE_ACCOUNT_KEY2")
 
 if service_account_json_string:
     try:
