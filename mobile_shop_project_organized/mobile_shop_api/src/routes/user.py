@@ -2,7 +2,6 @@ from flask import Blueprint, jsonify, request
 from src.models import db
 from src.models.login import LoginData # Changed import from User to LoginData
 from src.routes.auth import token_required
-from main import print_users_to_log # Import the function
 
 user_bp = Blueprint('user', __name__)
 
@@ -38,7 +37,6 @@ def create_user():
 
     db.session.add(new_user)
     db.session.commit()
-    print_users_to_log() # Call after user creation
     return jsonify(new_user.to_dict()), 201
 
 @user_bp.route('/users/<int:user_id>', methods=['GET'])
