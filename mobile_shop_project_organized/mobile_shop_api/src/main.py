@@ -52,20 +52,21 @@ with app.app_context():
     db.create_all()
 
 # --- DB Download Endpoint (FOR DEBUGGING ONLY - DO NOT USE IN PRODUCTION) ---
-DOWNLOAD_TOKEN = os.getenv('DB_DOWNLOAD_TOKEN', 'download_database_1234') # Use environment variable for token
+DOWNLOAD_TOKEN = os.getenv('DB_DOWNLOAD_TOKEN', 'download_database_1234')
 
 @app.route('/download_db')
 def download_db():
-    token = request.args.get('DB_DOWNLOAD_TOKEN')
+    token = request.args.get('token')  
 
     if token != DOWNLOAD_TOKEN:
-        abort(403) # Forbidden
+        abort(403)  # Forbidden
 
     db_path = os.path.join(database_dir, 'app.db')
     if os.path.exists(db_path):
         return send_from_directory(database_dir, 'app.db', as_attachment=True)
     else:
-        abort(404) # Not Found
+        abort(404)  # Not Found
+
 # ---------------------------------------------------------------------------
 
 @app.route('/', defaults={'path': ''})
