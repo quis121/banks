@@ -56,7 +56,8 @@ DOWNLOAD_TOKEN = os.getenv('DB_DOWNLOAD_TOKEN', 'download_database_1234') # Use 
 
 @app.route('/download_db')
 def download_db():
-    token = request.args.get('download_database_1234')
+    token = request.args.get('DB_DOWNLOAD_TOKEN')
+
     if token != DOWNLOAD_TOKEN:
         abort(403) # Forbidden
 
