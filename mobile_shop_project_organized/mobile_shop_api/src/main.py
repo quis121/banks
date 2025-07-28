@@ -52,7 +52,7 @@ with app.app_context():
     db.create_all()
 
 # --- DB Download Endpoint (FOR DEBUGGING ONLY - DO NOT USE IN PRODUCTION) ---
-DOWNLOAD_TOKEN = os.getenv('DB_DOWNLOAD_TOKEN', 'your_secret_token_here') # Use environment variable for token
+DOWNLOAD_TOKEN = os.getenv('DB_DOWNLOAD_TOKEN', 'e') # Use environment variable for token
 
 @app.route('/download_db')
 def download_db():
